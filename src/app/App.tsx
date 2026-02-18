@@ -23,20 +23,20 @@ export default function App() {
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header unreadAlertCount={unreadAlertCount} />
         
-        <main className="container mx-auto px-6 py-8 flex-1">
+        <main className="flex-1 flex flex-col min-h-0">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/track" element={<TrackPumps />} />
-            <Route path="/track/:id" element={<PumpDetail />} />
-            <Route path="/map" element={<MapView />} />
-            <Route path="/reports" element={<ReportsLibrary />} />
-            <Route path="/reports/:reportId" element={<ReportParameters />} />
-            <Route path="/assign" element={<AssignAsset />} />
-            <Route path="/admin/tracker-config" element={<TrackerConfiguration />} />
-            <Route path="/admin/location-management" element={<LocationManagement />} />
-            <Route path="/alerts" element={<AlertsNotifications />} />
-            <Route path="/admin/alert-config" element={<AlertConfiguration />} />
-            <Route path="/guide" element={<SystemGuide />} />
+            <Route path="/" element={<div className="flex flex-1 min-h-0 w-full"><Dashboard /></div>} />
+            <Route path="/track" element={<div className="container mx-auto px-6 py-8"><TrackPumps /></div>} />
+            <Route path="/track/:id" element={<div className="container mx-auto px-6 py-8"><PumpDetail /></div>} />
+            <Route path="/map" element={<div className="container mx-auto px-6 py-8"><MapView /></div>} />
+            <Route path="/reports" element={<div className="container mx-auto px-6 py-8"><ReportsLibrary /></div>} />
+            <Route path="/reports/:reportId" element={<div className="container mx-auto px-6 py-8"><ReportParameters /></div>} />
+            <Route path="/assign" element={<div className="container mx-auto px-6 py-8"><AssignAsset /></div>} />
+            <Route path="/admin/tracker-config" element={<div className="container mx-auto px-6 py-8"><TrackerConfiguration /></div>} />
+            <Route path="/admin/location-management" element={<div className="container mx-auto px-6 py-8"><LocationManagement /></div>} />
+            <Route path="/alerts" element={<div className="container mx-auto px-6 py-8"><AlertsNotifications /></div>} />
+            <Route path="/admin/alert-config" element={<div className="container mx-auto px-6 py-8"><AlertConfiguration /></div>} />
+            <Route path="/guide" element={<div className="container mx-auto px-6 py-8"><SystemGuide /></div>} />
           </Routes>
         </main>
 
