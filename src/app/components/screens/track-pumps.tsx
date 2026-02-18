@@ -247,7 +247,7 @@ export function TrackPumps() {
                   <TableHead>Assigned Pharmacy</TableHead>
                   <TableHead>Current Location</TableHead>
                   <TableHead>Last Updated</TableHead>
-                  <TableHead className="text-center">Battery</TableHead>
+                  <TableHead className="text-center">Tracker Battery</TableHead>
                   <TableHead>PM Due</TableHead>
                   <TableHead className="w-[50px]"></TableHead>
                 </TableRow>

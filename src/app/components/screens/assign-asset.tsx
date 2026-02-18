@@ -161,7 +161,7 @@ export function AssignAsset() {
               <Label htmlFor="patientId">Patient ID (Optional)</Label>
               <Input
                 id="patientId"
-                placeholder="For HIPAA compliance tracking"
+                placeholder="Enter patient ID"
                 value={patientId}
                 onChange={(e) => setPatientId(e.target.value)}
               />
