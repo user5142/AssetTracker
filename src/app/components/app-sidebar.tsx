@@ -71,7 +71,7 @@ export function AppSidebar() {
               </TooltipContent>
             </Tooltip>
           </div>
-          <div className="flex-1 overflow-y-auto space-y-1 px-2 pb-4">
+          <div className="flex-1 overflow-y-auto space-y-1 px-2 pt-3 pb-4">
             {navItems.map(({ to, icon: Icon, label }) => {
               const isActive = to === "/" ? location.pathname === "/" : (location.pathname === to || location.pathname.startsWith(to + "/"));
               return (
