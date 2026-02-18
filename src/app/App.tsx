@@ -44,10 +44,10 @@ export default function App() {
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
               <div>
-                <span className="font-semibold">Asset Tracker</span> - Medical Device Tracking Platform
+                <span className="font-semibold">AssetTracker</span> - Medical Device Tracking Platform
               </div>
               <div className="flex items-center gap-4">
-                <span>© 2026 Asset Tracker. All rights reserved.</span>
+                <span>© 2026 AssetTracker. All rights reserved.</span>
               </div>
             </div>
           </div>
