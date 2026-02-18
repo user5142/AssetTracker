@@ -32,17 +32,40 @@ export function AppSidebar() {
   return (
     <TooltipProvider>
       <aside
-        className={`shrink-0 flex flex-col border-r bg-white transition-[width] duration-200 ease-in-out ${
+        className={`shrink-0 flex flex-col border-r border-gray-200 bg-[#f7f7f8] transition-[width] duration-200 ease-in-out ${
           sidebarCollapsed ? "w-14" : "w-56"
         }`}
       >
-        <nav className="flex flex-1 flex-col py-4">
-          {!sidebarCollapsed && (
-            <h2 className="mb-3 px-3 text-sm font-semibold text-gray-500 uppercase tracking-wider">
-              Quick Actions
-            </h2>
-          )}
-          <div className="space-y-1 px-2">
+        <nav className="flex flex-1 flex-col min-h-0">
+          {/* Top row: collapse control tucked at top-right */}
+          <div className={`flex items-center shrink-0 py-3 ${sidebarCollapsed ? "justify-center px-0" : "justify-between gap-2 px-3"}`}>
+            {!sidebarCollapsed && (
+              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider truncate">
+                Quick Actions
+              </span>
+            )}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="size-8 shrink-0"
+                  onClick={() => setSidebarCollapsed((c) => !c)}
+                  aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                >
+                  {sidebarCollapsed ? (
+                    <PanelLeftOpen className="size-4" />
+                  ) : (
+                    <PanelLeftClose className="size-4" />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={8}>
+                {sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <div className="flex-1 overflow-y-auto space-y-1 px-2 pb-4">
             {navItems.map(({ to, icon: Icon, label }) => {
               const isActive = to === "/" ? location.pathname === "/" : (location.pathname === to || location.pathname.startsWith(to + "/"));
               return (
@@ -64,31 +87,6 @@ export function AppSidebar() {
                 </Tooltip>
               );
             })}
-          </div>
-          <div className="mt-auto border-t pt-2 px-2">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={`w-full ${sidebarCollapsed ? "" : "justify-start gap-2"}`}
-                  onClick={() => setSidebarCollapsed((c) => !c)}
-                  aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                >
-                  {sidebarCollapsed ? (
-                    <PanelLeftOpen className="size-4 shrink-0" />
-                  ) : (
-                    <>
-                      <PanelLeftClose className="size-4 shrink-0" />
-                      <span>Collapse</span>
-                    </>
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="right" sideOffset={8}>
-                {sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              </TooltipContent>
-            </Tooltip>
           </div>
         </nav>
       </aside>
