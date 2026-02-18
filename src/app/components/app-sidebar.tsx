@@ -47,7 +47,7 @@ export function AppSidebar() {
                   alt="Intuvie"
                   className="h-8 w-auto shrink-0"
                 />
-                <span className="font-semibold text-lg truncate">Asset Tracker</span>
+                <span className="font-semibold text-lg truncate">AssetTracker</span>
               </Link>
             )}
             <Tooltip>
