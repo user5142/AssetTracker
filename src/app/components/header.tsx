@@ -20,9 +20,9 @@ interface HeaderProps {
 export function Header({ unreadAlertCount = 0 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
-      <div className="flex h-16 items-center gap-4 px-6">
-        {/* Logo/Brand */}
-        <Link to="/" className="flex items-center gap-3">
+      <div className="flex h-16 w-full items-center justify-between gap-6 px-6 lg:px-8">
+        {/* Logo/Brand - left */}
+        <Link to="/" className="flex shrink-0 items-center gap-3">
           <img 
             src={pharmericaLogo} 
             alt="Pharmerica" 
@@ -31,9 +31,9 @@ export function Header({ unreadAlertCount = 0 }: HeaderProps) {
           <span className="font-semibold text-lg">AssetTracker</span>
         </Link>
 
-        {/* Global Search */}
-        <div className="flex-1 max-w-md mx-8 hidden md:block">
-          <div className="relative">
+        {/* Global Search - centered */}
+        <div className="hidden flex-1 md:flex md:justify-center md:px-8">
+          <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-gray-400" />
             <Input
               placeholder="Search by serial #, location, facility..."
@@ -42,8 +42,8 @@ export function Header({ unreadAlertCount = 0 }: HeaderProps) {
           </div>
         </div>
 
-        {/* Right actions */}
-        <div className="flex items-center gap-2">
+        {/* Right actions - right */}
+        <div className="flex shrink-0 items-center gap-2">
           <Button variant="ghost" size="icon" className="relative" asChild>
             <Link to="/alerts">
               <Bell className="size-5" />
