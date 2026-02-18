@@ -41,7 +41,7 @@ export function AppSidebar() {
           {/* Top row: logo + Asset Tracker (hidden when collapsed), collapse at top-right */}
           <div className={`flex items-center shrink-0 py-3 ${sidebarCollapsed ? "justify-center px-0" : "justify-between gap-2 px-3"}`}>
             {!sidebarCollapsed && (
-              <Link to="/" className="flex shrink-0 items-center gap-3 min-w-0">
+              <Link to="/" className="flex shrink-0 items-center gap-3 min-w-0 cursor-pointer">
                 <img
                   src={intuvieLogo}
                   alt="Intuvie"
@@ -77,7 +77,7 @@ export function AppSidebar() {
               return (
                 <Tooltip key={to}>
                   <TooltipTrigger asChild>
-                    <Link to={to}>
+                    <Link to={to} className="cursor-pointer">
                       <Button
                         variant={isActive ? "secondary" : "ghost"}
                         className={`w-full h-10 font-normal ${sidebarCollapsed ? "justify-center px-0" : "justify-start gap-2"}`}

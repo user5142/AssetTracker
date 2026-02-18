@@ -220,8 +220,9 @@ export function TrackPumps() {
                   >
                     {filter.label}
                     <button
+                      type="button"
                       onClick={() => clearFilter(filter.key)}
-                      className="hover:text-red-600"
+                      className="hover:text-red-600 cursor-pointer"
                     >
                       ×
                     </button>
@@ -274,7 +275,7 @@ export function TrackPumps() {
                       <TableCell>
                         <Link
                           to={`/track/${asset.id}`}
-                          className="text-blue-600 hover:underline font-medium"
+                          className="text-blue-600 hover:underline font-medium cursor-pointer"
                         >
                           {asset.serialNumber}
                         </Link>
@@ -328,7 +329,7 @@ export function TrackPumps() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem asChild>
-                              <Link to={`/track/${asset.id}`}>View Details</Link>
+                              <Link to={`/track/${asset.id}`} className="cursor-pointer">View Details</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>Change Pharmacy</DropdownMenuItem>
                             <DropdownMenuItem>Update Status</DropdownMenuItem>

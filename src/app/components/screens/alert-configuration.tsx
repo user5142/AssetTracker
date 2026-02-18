@@ -185,8 +185,9 @@ export function AlertConfiguration() {
                         <Badge key={email} variant="secondary" className="gap-2">
                           {email}
                           <button
+                            type="button"
                             onClick={() => removeRecipient(config.id, email)}
-                            className="hover:text-red-600"
+                            className="hover:text-red-600 cursor-pointer"
                           >
                             <X className="size-3" />
                           </button>

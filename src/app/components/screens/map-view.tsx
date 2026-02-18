@@ -140,9 +140,10 @@ export function MapView() {
                 <div className="space-y-2">
                   {filteredAssets.map((asset) => (
                     <button
+                      type="button"
                       key={asset.id}
                       onClick={() => setSelectedAsset(asset.id)}
-                      className={`w-full text-left p-3 rounded-lg border transition-colors ${
+                      className={`w-full text-left p-3 rounded-lg border transition-colors cursor-pointer ${
                         selectedAsset === asset.id
                           ? 'bg-blue-50 border-blue-300'
                           : 'bg-white hover:bg-gray-50'
@@ -222,7 +223,7 @@ export function MapView() {
                             <p className="font-medium text-sm">{asset.serialNumber}</p>
                             <p className="text-xs text-gray-600">{asset.currentLocation}</p>
                             <Button size="sm" className="w-full mt-2" asChild>
-                              <Link to={`/track/${asset.id}`}>View Details</Link>
+                              <Link to={`/track/${asset.id}`} className="cursor-pointer">View Details</Link>
                             </Button>
                           </div>
                         )}
