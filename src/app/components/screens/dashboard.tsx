@@ -14,26 +14,15 @@ import {
   Truck, 
   Wrench, 
   AlertTriangle,
-  MapPin,
   Activity,
-  FileText,
   Building2,
-  PanelLeftClose,
-  PanelLeftOpen,
 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider,
-} from "../ui/tooltip";
 import { mockAssets, mockAlerts, mockLocations } from "../../lib/data";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
 
 export function Dashboard() {
   const [selectedPharmacy, setSelectedPharmacy] = useState<string>("all");
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   
   // Filter assets by selected pharmacy
   const filteredAssets = selectedPharmacy === "all" 
@@ -95,80 +84,9 @@ export function Dashboard() {
     },
   ];
 
-  const quickActions = [
-    { to: "/track", icon: MapPin, label: "Track Pumps" },
-    { to: "/assign", icon: Activity, label: "Assign Asset" },
-    { to: "/reports", icon: FileText, label: "Generate Report" },
-    { to: "/admin/location-management", icon: Building2, label: "Manage Locations" },
-  ];
-
   return (
-    <TooltipProvider>
-      <div className="flex h-full min-h-0 w-full">
-        {/* Full-height collapsible sidebar */}
-        <aside
-          className={`shrink-0 flex flex-col border-r bg-white transition-[width] duration-200 ease-in-out ${
-            sidebarCollapsed ? "w-14" : "w-56"
-          }`}
-        >
-          <nav className="flex flex-1 flex-col py-4">
-            {!sidebarCollapsed && (
-              <h2 className="mb-3 px-3 text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                Quick Actions
-              </h2>
-            )}
-            <div className="space-y-1 px-2">
-              {quickActions.map(({ to, icon: Icon, label }) => (
-                <Tooltip key={to}>
-                  <TooltipTrigger asChild>
-                    <Link to={to}>
-                      <Button
-                        variant="ghost"
-                        className={`w-full h-10 font-normal ${sidebarCollapsed ? "justify-center px-0" : "justify-start gap-2"}`}
-                      >
-                        <Icon className="size-4 shrink-0" />
-                        {!sidebarCollapsed && <span>{label}</span>}
-                      </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right" sideOffset={8}>
-                    {label}
-                  </TooltipContent>
-                </Tooltip>
-              ))}
-            </div>
-            <div className="mt-auto border-t pt-2 px-2">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className={`w-full ${sidebarCollapsed ? "" : "justify-start gap-2"}`}
-                    onClick={() => setSidebarCollapsed((c) => !c)}
-                    aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                  >
-                    {sidebarCollapsed ? (
-                      <PanelLeftOpen className="size-4 shrink-0" />
-                    ) : (
-                      <>
-                        <PanelLeftClose className="size-4 shrink-0" />
-                        <span>Collapse</span>
-                      </>
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="right" sideOffset={8}>
-                  {sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </nav>
-        </aside>
-
-        {/* Main content */}
-        <div className="min-w-0 flex-1 overflow-auto">
-          <div className="container mx-auto px-6 py-8 space-y-6">
-        <div className="flex items-center justify-between">
+    <div className="container mx-auto px-6 py-8 space-y-6">
+      <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <p className="text-gray-600 mt-1">Welcome back! Here's an overview of your asset tracking system.</p>
@@ -322,9 +240,6 @@ export function Dashboard() {
           </CardContent>
         </Card>
       </div>
-      </div>
-      </div>
     </div>
-    </TooltipProvider>
   );
 }
