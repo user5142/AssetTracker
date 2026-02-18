@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Link } from "react-router";
-import pharmericaLogo from "@/assets/pharmerica_logo.jpg";
+import intuvieLogo from "@/assets/intuvie_logo.jpg";
 
 interface HeaderProps {
   unreadAlertCount?: number;
@@ -24,8 +24,8 @@ export function Header({ unreadAlertCount = 0 }: HeaderProps) {
         {/* Logo/Brand - left */}
         <Link to="/" className="flex shrink-0 items-center gap-3">
           <img 
-            src={pharmericaLogo} 
-            alt="Pharmerica" 
+            src={intuvieLogo} 
+            alt="Intuvie" 
             className="h-8 w-auto"
           />
           <span className="font-semibold text-lg">AssetTracker</span>
