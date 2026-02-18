@@ -46,18 +46,6 @@ export default function App() {
                 <Route path="/guide" element={<PageContainer><SystemGuide /></PageContainer>} />
               </Routes>
             </main>
-            <footer className="border-t bg-white py-6 shrink-0">
-              <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
-                  <div>
-                    <span className="font-semibold">AssetTracker</span> - Medical Device Tracking Platform
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span>© 2026 AssetTracker. All rights reserved.</span>
-                  </div>
-                </div>
-              </div>
-          </footer>
         </div>
       </div>
       <Toaster />

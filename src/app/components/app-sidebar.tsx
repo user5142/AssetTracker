@@ -33,7 +33,7 @@ export function AppSidebar() {
   return (
     <TooltipProvider>
       <aside
-        className={`shrink-0 flex flex-col border-r border-gray-200 bg-[#f7f7f8] transition-[width] duration-200 ease-in-out ${
+        className={`shrink-0 flex flex-col border-r border-gray-200 bg-gray-50 transition-[width] duration-200 ease-in-out ${
           sidebarCollapsed ? "w-14" : "w-56"
         }`}
       >
