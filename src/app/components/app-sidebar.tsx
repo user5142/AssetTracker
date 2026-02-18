@@ -16,6 +16,7 @@ import {
   PanelLeftOpen,
 } from "lucide-react";
 import { useState } from "react";
+import intuvieLogo from "@/assets/intuvie_logo.jpg";
 
 const navItems = [
   { to: "/", icon: Home, label: "Home" },
@@ -37,12 +38,17 @@ export function AppSidebar() {
         }`}
       >
         <nav className="flex flex-1 flex-col min-h-0">
-          {/* Top row: collapse control tucked at top-right */}
+          {/* Top row: logo + Asset Tracker (hidden when collapsed), collapse at top-right */}
           <div className={`flex items-center shrink-0 py-3 ${sidebarCollapsed ? "justify-center px-0" : "justify-between gap-2 px-3"}`}>
             {!sidebarCollapsed && (
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider truncate">
-                Quick Actions
-              </span>
+              <Link to="/" className="flex shrink-0 items-center gap-3 min-w-0">
+                <img
+                  src={intuvieLogo}
+                  alt="Intuvie"
+                  className="h-8 w-auto shrink-0"
+                />
+                <span className="font-semibold text-lg truncate">Asset Tracker</span>
+              </Link>
             )}
             <Tooltip>
               <TooltipTrigger asChild>

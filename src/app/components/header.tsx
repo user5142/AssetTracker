@@ -1,4 +1,4 @@
-import { Bell, Search, User, Settings, Wrench, BookOpen, Building2 } from "lucide-react";
+import { Bell, Search, User, Settings, Wrench, Building2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Link } from "react-router";
-import intuvieLogo from "@/assets/intuvie_logo.jpg";
 
 interface HeaderProps {
   unreadAlertCount?: number;
@@ -21,17 +20,7 @@ export function Header({ unreadAlertCount = 0 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="flex h-16 w-full items-center justify-between gap-6 px-6 lg:px-8">
-        {/* Logo/Brand - left */}
-        <Link to="/" className="flex shrink-0 items-center gap-3">
-          <img 
-            src={intuvieLogo} 
-            alt="Intuvie" 
-            className="h-8 w-auto"
-          />
-          <span className="font-semibold text-lg">AssetTracker</span>
-        </Link>
-
-        {/* Global Search - centered */}
+        {/* Global Search - left */}
         <div className="hidden flex-1 md:flex md:justify-center md:px-8">
           <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-gray-400" />
