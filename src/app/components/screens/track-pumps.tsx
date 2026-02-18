@@ -248,7 +248,7 @@ export function TrackPumps() {
                   <TableHead>Assigned Pharmacy</TableHead>
                   <TableHead>Current Location</TableHead>
                   <TableHead>Last Updated</TableHead>
-                  <TableHead className="text-center">Tracker Battery</TableHead>
+                  <TableHead>Tracker Battery</TableHead>
                   <TableHead>PM Due</TableHead>
                   <TableHead className="w-[50px]"></TableHead>
                 </TableRow>
@@ -305,7 +305,7 @@ export function TrackPumps() {
                       <TableCell className="text-sm text-gray-600">
                         {formatDistanceToNow(asset.lastUpdated, { addSuffix: true })}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="text-left">
                         {asset.batteryPercent !== undefined ? (
                           <BatteryIndicator percent={asset.batteryPercent} />
                         ) : (
