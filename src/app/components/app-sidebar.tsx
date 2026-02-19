@@ -12,6 +12,7 @@ import {
   Activity,
   FileText,
   Building2,
+  Package,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
@@ -21,6 +22,7 @@ import intuvieLogo from "@/assets/intuvie_logo.jpg";
 const navItems = [
   { to: "/", icon: Home, label: "Home" },
   { to: "/track", icon: MapPin, label: "Track Pumps" },
+  { to: "/admin/manage-inventory", icon: Package, label: "Manage Inventory" },
   { to: "/assign", icon: Activity, label: "Assign Asset" },
   { to: "/reports", icon: FileText, label: "Generate Report" },
   { to: "/admin/location-management", icon: Building2, label: "Manage Locations" },

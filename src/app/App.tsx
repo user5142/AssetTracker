@@ -13,6 +13,7 @@ import { TrackerConfiguration } from "./components/screens/tracker-configuration
 import { AlertsNotifications } from "./components/screens/alerts-notifications";
 import { AlertConfiguration } from "./components/screens/alert-configuration";
 import { LocationManagement } from "./components/screens/location-management";
+import { ManageInventory } from "./components/screens/manage-inventory";
 import { SystemGuide } from "./components/screens/system-guide";
 import { mockAlerts } from "./lib/data";
 
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="/reports/:reportId" element={<PageContainer><ReportParameters /></PageContainer>} />
                 <Route path="/assign" element={<PageContainer><AssignAsset /></PageContainer>} />
                 <Route path="/admin/tracker-config" element={<PageContainer><TrackerConfiguration /></PageContainer>} />
+                <Route path="/admin/manage-inventory" element={<PageContainer><ManageInventory /></PageContainer>} />
                 <Route path="/admin/location-management" element={<PageContainer><LocationManagement /></PageContainer>} />
                 <Route path="/alerts" element={<PageContainer><AlertsNotifications /></PageContainer>} />
                 <Route path="/admin/alert-config" element={<PageContainer><AlertConfiguration /></PageContainer>} />

@@ -75,6 +75,24 @@ export interface TrackerConfig {
   lastPing: Date;
 }
 
+/** GPS tracker device (by IMEI); SIM and pump link optional until configured */
+export interface GpsTrackerDevice {
+  id: string;
+  imei: string;
+  simId?: string;
+  pumpSerialNumber?: string;
+  location?: string;
+  batteryPercent?: number;
+  lastPing?: Date;
+}
+
+/** SIM card entity; can be associated with a tracker (IMEI) later */
+export interface SimCard {
+  id: string;
+  simId: string;
+  imei?: string;
+}
+
 export interface AlertConfig {
   id: string;
   type: string;

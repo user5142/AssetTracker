@@ -8,7 +8,9 @@ import type {
   TrackerConfig, 
   AlertConfig, 
   Location, 
-  Report 
+  Report,
+  SimCard,
+  GpsTrackerDevice,
 } from './types';
 
 // Helper function to create dates relative to now
@@ -321,6 +323,24 @@ export const mockTrackerConfigs: TrackerConfig[] = [
     batteryPercent: 92,
     lastPing: hoursAgo(1),
   },
+];
+
+export const mockSimCards: SimCard[] = [
+  { id: 'sim-1', simId: '89011703278306543210', imei: '356938035643809' },
+  { id: 'sim-2', simId: '89011703278306543211', imei: '356938035643810' },
+  { id: 'sim-3', simId: '89011703278306543212', imei: '356938035643811' },
+  { id: 'sim-4', simId: '89011703278306543213', imei: '356938035643812' },
+  { id: 'sim-5', simId: '89011703278306543214', imei: '356938035643813' },
+  { id: 'sim-6', simId: '89011703278306543299' },
+  { id: 'sim-7', simId: '89011703278306543300' },
+];
+
+export const mockGpsTrackerDevices: GpsTrackerDevice[] = [
+  { id: 'gps-1', imei: '356938035643809', simId: '89011703278306543210', pumpSerialNumber: 'PMP-12345', location: 'St. Mary\'s Hospital - ICU', batteryPercent: 87, lastPing: hoursAgo(2) },
+  { id: 'gps-2', imei: '356938035643810', simId: '89011703278306543211', pumpSerialNumber: 'PMP-12346', location: 'Unknown', batteryPercent: 15, lastPing: daysAgo(5) },
+  { id: 'gps-3', imei: '356938035643811', simId: '89011703278306543212', pumpSerialNumber: 'PMP-12348', location: 'In Transit', batteryPercent: 92, lastPing: hoursAgo(1) },
+  { id: 'gps-4', imei: '356938035643999' },
+  { id: 'gps-5', imei: '356938035644000', simId: '89011703278306543299' },
 ];
 
 export const mockAlertConfigs: AlertConfig[] = [
