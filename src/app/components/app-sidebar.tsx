@@ -77,22 +77,15 @@ export function AppSidebar() {
             {navItems.map(({ to, icon: Icon, label }) => {
               const isActive = to === "/" ? location.pathname === "/" : (location.pathname === to || location.pathname.startsWith(to + "/"));
               return (
-                <Tooltip key={to}>
-                  <TooltipTrigger asChild>
-                    <Link to={to} className="cursor-pointer">
-                      <Button
-                        variant={isActive ? "secondary" : "ghost"}
-                        className={`w-full h-10 font-normal ${sidebarCollapsed ? "justify-center px-0" : "justify-start gap-2"}`}
-                      >
-                        <Icon className="size-4 shrink-0" />
-                        {!sidebarCollapsed && <span>{label}</span>}
-                      </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right" sideOffset={8}>
-                    {label}
-                  </TooltipContent>
-                </Tooltip>
+                <Link key={to} to={to} className="cursor-pointer">
+                  <Button
+                    variant={isActive ? "secondary" : "ghost"}
+                    className={`w-full h-10 font-normal ${sidebarCollapsed ? "justify-center px-0" : "justify-start gap-2"}`}
+                  >
+                    <Icon className="size-4 shrink-0" />
+                    {!sidebarCollapsed && <span>{label}</span>}
+                  </Button>
+                </Link>
               );
             })}
           </div>
