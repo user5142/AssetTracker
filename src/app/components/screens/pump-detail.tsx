@@ -47,7 +47,7 @@ export function PumpDetail() {
           <h2 className="text-2xl font-bold mb-2">Asset Not Found</h2>
           <p className="text-gray-600 mb-4">The asset you're looking for doesn't exist.</p>
           <Button asChild>
-            <Link to="/track">Back to Track Pumps</Link>
+            <Link to="/track">Back to Track Devices</Link>
           </Button>
         </div>
       </div>
@@ -65,7 +65,7 @@ export function PumpDetail() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/track">Track Pumps</BreadcrumbLink>
+            <BreadcrumbLink href="/track">Track Devices</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

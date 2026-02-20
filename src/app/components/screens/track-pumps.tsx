@@ -136,14 +136,14 @@ export function TrackPumps() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Track Pumps</BreadcrumbPage>
+            <BreadcrumbPage>Track Devices</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Track Pumps</h1>
+          <h1 className="text-3xl font-bold">Track Devices</h1>
           <p className="text-gray-600 mt-1">Monitor all assets in real-time</p>
         </div>
       </div>

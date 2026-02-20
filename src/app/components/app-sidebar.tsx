@@ -21,7 +21,7 @@ import intuvieLogo from "@/assets/intuvie_logo.jpg";
 
 const navItems = [
   { to: "/", icon: Home, label: "Home" },
-  { to: "/track", icon: MapPin, label: "Track Pumps" },
+  { to: "/track", icon: MapPin, label: "Track Devices" },
   { to: "/admin/manage-inventory", icon: Package, label: "Manage Inventory" },
   { to: "/assign", icon: Activity, label: "Assign Asset" },
   { to: "/reports", icon: FileText, label: "Generate Report" },

@@ -19,7 +19,7 @@ export function SystemGuide() {
       path: "/",
     },
     {
-      name: "Track Pumps",
+      name: "Track Devices",
       icon: MapPin,
       description: "Searchable, filterable table of all assets with real-time status and PM information",
       path: "/track",
