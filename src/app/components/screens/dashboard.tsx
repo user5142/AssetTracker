@@ -2,33 +2,26 @@ import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { 
-  CheckCircle, 
-  Home, 
-  Truck, 
-  Wrench, 
+  CheckCircle,
+  Home,
+  Truck,
+  Wrench,
   AlertTriangle,
   Activity,
-  Building2,
 } from "lucide-react";
-import { mockAssets, mockAlerts, mockLocations } from "../../lib/data";
+import { mockAssets, mockAlerts } from "../../lib/data";
 import { formatDistanceToNow } from "date-fns";
-import { useState } from "react";
+import { usePharmacy } from "../../lib/pharmacy-context";
 
 export function Dashboard() {
-  const [selectedPharmacy, setSelectedPharmacy] = useState<string>("all");
-  
-  // Filter assets by selected pharmacy
-  const filteredAssets = selectedPharmacy === "all" 
-    ? mockAssets 
-    : mockAssets.filter(a => a.assignedPharmacyId === selectedPharmacy);
-  
+  const { selectedPharmacyId } = usePharmacy();
+
+  // Filter assets by selected pharmacy (from header)
+  const filteredAssets =
+    selectedPharmacyId === "all"
+      ? mockAssets
+      : mockAssets.filter((a) => a.assignedPharmacyId === selectedPharmacyId);
+
   // Calculate status counts
   const statusCounts = {
     'At Facility': filteredAssets.filter(a => a.status === 'At Facility').length,
@@ -38,8 +31,7 @@ export function Dashboard() {
     'Lost/Problem': filteredAssets.filter(a => a.status === 'Lost/Problem').length,
   };
 
-  const recentAlerts = mockAlerts.filter(a => !a.isRead).slice(0, 5);
-  const pharmacyLocations = mockLocations.filter(l => l.type === 'Pharmacy');
+  const recentAlerts = mockAlerts.filter((a) => !a.isRead).slice(0, 5);
 
   const statusCards = [
     {
@@ -86,30 +78,10 @@ export function Dashboard() {
 
   return (
     <div className="container mx-auto px-6 py-8 space-y-6">
-      <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-gray-600 mt-1">Welcome back! Here's an overview of your asset tracking system.</p>
-          </div>
-          
-          {/* Pharmacy Selector */}
-          <div className="flex items-center gap-2">
-            <Building2 className="size-5 text-gray-600" />
-            <Select value={selectedPharmacy} onValueChange={setSelectedPharmacy}>
-              <SelectTrigger className="w-[220px]">
-                <SelectValue placeholder="Select Pharmacy" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Pharmacies</SelectItem>
-                {pharmacyLocations.map((pharmacy) => (
-                  <SelectItem key={pharmacy.id} value={pharmacy.id}>
-                    {pharmacy.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+      <div>
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <p className="text-gray-600 mt-1">Welcome back! Here's an overview of your asset tracking system.</p>
+      </div>
 
         {/* Status Overview */}
         <Card>

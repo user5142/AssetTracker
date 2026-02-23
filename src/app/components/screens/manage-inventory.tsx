@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -53,16 +53,24 @@ import {
   mockTrackerConfigs as initialTrackerConfigs,
 } from "../../lib/data";
 import type { Asset, AssetType, SimCard, GpsTrackerDevice, TrackerConfig } from "../../lib/types";
+import { usePharmacy } from "../../lib/pharmacy-context";
 import { Package, Radio, Smartphone, Link2, Plus, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 const assetTypes: AssetType[] = ["Pump - GPS", "Pump - Rental", "E-kit"];
 
 export function ManageInventory() {
+  const { selectedPharmacyId } = usePharmacy();
   const [assets, setAssets] = useState<Asset[]>(mockAssets);
   const [simCards, setSimCards] = useState<SimCard[]>(initialSimCards);
   const [gpsDevices, setGpsDevices] = useState<GpsTrackerDevice[]>(initialGpsDevices);
   const [trackerConfigs, setTrackerConfigs] = useState<TrackerConfig[]>(initialTrackerConfigs);
+
+  // Serialized assets filtered by header pharmacy selector
+  const displayedAssets =
+    selectedPharmacyId === "all"
+      ? assets
+      : assets.filter((a) => a.assignedPharmacyId === selectedPharmacyId);
 
   // Serialized Assets state
   const [assetDialogOpen, setAssetDialogOpen] = useState(false);
@@ -71,6 +79,13 @@ export function ManageInventory() {
     assetType: "Pump - GPS" as AssetType,
     assignedPharmacyId: "",
   });
+
+  // When opening Add Asset dialog, default assigned pharmacy to header selection if one is selected
+  useEffect(() => {
+    if (assetDialogOpen && selectedPharmacyId !== "all") {
+      setNewAsset((prev) => ({ ...prev, assignedPharmacyId: selectedPharmacyId }));
+    }
+  }, [assetDialogOpen, selectedPharmacyId]);
 
   // GPS Trackers state
   const [trackerDialogOpen, setTrackerDialogOpen] = useState(false);
@@ -454,7 +469,7 @@ export function ManageInventory() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {assets.slice(0, 20).map((a) => (
+                    {displayedAssets.slice(0, 20).map((a) => (
                       <TableRow key={a.id}>
                         <TableCell className="font-medium">{a.serialNumber}</TableCell>
                         <TableCell>{a.assetType}</TableCell>
@@ -468,9 +483,9 @@ export function ManageInventory() {
                   </TableBody>
                 </Table>
               </div>
-              {assets.length > 20 && (
+              {displayedAssets.length > 20 && (
                 <p className="px-4 py-2 text-sm text-gray-500">
-                  Showing 20 of {assets.length} assets.
+                  Showing 20 of {displayedAssets.length} assets.
                 </p>
               )}
             </CardContent>

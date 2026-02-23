@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Toaster } from "./components/ui/sonner";
+import { PharmacyProvider } from "./lib/pharmacy-context";
 import { Header } from "./components/header";
 import { AppSidebar } from "./components/app-sidebar";
 import { Dashboard } from "./components/screens/dashboard";
@@ -26,6 +27,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <PharmacyProvider>
       {/* Full viewport row: sidebar full height, header adjacent to it (not above) */}
       <div className="h-screen flex bg-gray-50">
         <AppSidebar />
@@ -51,6 +53,7 @@ export default function App() {
         </div>
       </div>
       <Toaster />
+      </PharmacyProvider>
     </BrowserRouter>
   );
 }

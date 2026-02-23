@@ -3,6 +3,13 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -11,16 +18,19 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Link } from "react-router";
+import { usePharmacy } from "../lib/pharmacy-context";
 
 interface HeaderProps {
   unreadAlertCount?: number;
 }
 
 export function Header({ unreadAlertCount = 0 }: HeaderProps) {
+  const { selectedPharmacyId, setSelectedPharmacyId, pharmacyLocations } = usePharmacy();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white">
       <div className="flex h-16 w-full items-center justify-between gap-6 px-6 lg:px-8">
-        {/* Global Search - left */}
+        {/* Global Search - left/center */}
         <div className="hidden flex-1 md:flex md:justify-center md:px-8">
           <div className="relative w-full max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-gray-400" />
@@ -31,8 +41,24 @@ export function Header({ unreadAlertCount = 0 }: HeaderProps) {
           </div>
         </div>
 
-        {/* Right actions - right */}
+        {/* Right: pharmacy picker, notification bell, user icon */}
         <div className="flex shrink-0 items-center gap-2">
+          <div className="flex items-center gap-2">
+            <Building2 className="size-5 text-gray-600" />
+            <Select value={selectedPharmacyId} onValueChange={setSelectedPharmacyId}>
+              <SelectTrigger className="w-[200px] lg:w-[220px]">
+                <SelectValue placeholder="Select Pharmacy" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Pharmacies</SelectItem>
+                {pharmacyLocations.map((pharmacy) => (
+                  <SelectItem key={pharmacy.id} value={pharmacy.id}>
+                    {pharmacy.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           <Button variant="ghost" size="icon" className="relative" asChild>
             <Link to="/alerts">
               <Bell className="size-5" />

@@ -35,6 +35,7 @@ import { Card, CardContent } from "../ui/card";
 import { StatusBadge, PMStatusBadge, BatteryIndicator } from "../status-indicators";
 import { mockAssets } from "../../lib/data";
 import type { Asset, AssetStatus, AssetType, PMStatus } from "../../lib/types";
+import { usePharmacy } from "../../lib/pharmacy-context";
 import { Download, Filter, MoreVertical, Search, ChevronLeft, ChevronRight, Radio } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { formatDistanceToNow, format } from "date-fns";
@@ -42,7 +43,8 @@ import { formatDistanceToNow, format } from "date-fns";
 export function TrackPumps() {
   const [searchParams] = useSearchParams();
   const initialStatus = searchParams.get('status') as AssetStatus | null;
-  
+  const { selectedPharmacyId } = usePharmacy();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>(initialStatus || "all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
@@ -53,9 +55,12 @@ export function TrackPumps() {
 
   const itemsPerPage = 50;
 
-  // Filter and search logic
+  // Filter and search logic (header pharmacy selector drives base list)
   const filteredAssets = useMemo(() => {
-    let filtered = [...mockAssets];
+    let filtered =
+      selectedPharmacyId === "all"
+        ? [...mockAssets]
+        : mockAssets.filter((a) => a.assignedPharmacyId === selectedPharmacyId);
 
     // Search
     if (searchQuery) {
@@ -98,7 +103,7 @@ export function TrackPumps() {
     }
 
     return filtered;
-  }, [searchQuery, statusFilter, typeFilter, pmFilter, sortColumn, sortDirection]);
+  }, [selectedPharmacyId, searchQuery, statusFilter, typeFilter, pmFilter, sortColumn, sortDirection]);
 
   const totalPages = Math.ceil(filteredAssets.length / itemsPerPage);
   const paginatedAssets = filteredAssets.slice(
