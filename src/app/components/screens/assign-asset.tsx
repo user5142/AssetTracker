@@ -156,12 +156,12 @@ export function AssignAsset() {
               </div>
             </div>
 
-            {/* Patient ID */}
+            {/* Order Number - commented out, not displayed
             <div className="space-y-2">
-              <Label htmlFor="patientId">Patient ID (Optional)</Label>
+              <Label htmlFor="patientId">Order Number (Optional)</Label>
               <Input
                 id="patientId"
-                placeholder="Enter patient ID"
+                placeholder="Enter order number"
                 value={patientId}
                 onChange={(e) => setPatientId(e.target.value)}
               />
@@ -169,6 +169,7 @@ export function AssignAsset() {
                 Patient identifiers are encrypted and stored securely
               </p>
             </div>
+            */}
 
             {/* Notes */}
             <div className="space-y-2">
