@@ -357,11 +357,20 @@ export function ManageInventory() {
         </BreadcrumbList>
       </Breadcrumb>
 
-      <div>
-        <h1 className="text-3xl font-bold">Manage Inventory</h1>
-        <p className="text-gray-600 mt-1">
-          Add serialized assets, GPS trackers, SIM cards, and manage tracker–pump associations (REQ-009).
-        </p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold">Manage Inventory</h1>
+          <p className="text-gray-600 mt-1">
+            Add serialized assets, GPS trackers, SIM cards, and manage tracker–pump associations (REQ-009).
+          </p>
+        </div>
+        <div className="flex items-center gap-4 rounded-lg border bg-muted/50 px-4 py-3">
+          <span className="text-sm font-medium text-muted-foreground">Fleet size</span>
+          <span className="text-2xl font-semibold tabular-nums">
+            {displayedAssets.length}
+          </span>
+          <span className="text-sm text-muted-foreground">assets</span>
+        </div>
       </div>
 
       <Tabs defaultValue="assets" className="space-y-4">
