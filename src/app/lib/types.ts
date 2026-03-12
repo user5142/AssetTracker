@@ -41,13 +41,17 @@ export interface OrderHistoryEntry {
   createdAt: Date;
 }
 
+/** Location stay record (not individual GPS pings). Includes both customer facilities and pharmacy locations. */
 export interface LocationHistory {
   id: string;
   assetId: string;
-  facility: string;
+  /** What the Assigned Location field was set to during this stay */
+  assignedLocation: string;
+  /** Actual location during this stay */
+  actualLocation: string;
   arrivalDate: Date;
   departureDate?: Date;
-  status: AssetStatus;
+  status?: AssetStatus;
 }
 
 export interface Alert {

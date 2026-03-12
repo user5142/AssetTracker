@@ -84,9 +84,6 @@ export function PumpDetail() {
               <div className="flex items-center gap-3 mb-2">
                 <h1 className="text-3xl font-bold">{asset.serialNumber}</h1>
                 <Badge variant="outline">{asset.assetType}</Badge>
-                {asset.orderNumber && (
-                  <span className="text-lg font-medium text-gray-700">Order: {asset.orderNumber}</span>
-                )}
                 {isGPS && <Radio className="size-5 text-blue-600" />}
               </div>
               <div className="flex items-center gap-4 text-sm text-gray-600">
@@ -183,43 +180,50 @@ export function PumpDetail() {
         <TabsContent value="history">
           <Card>
             <CardHeader>
-              <CardTitle>Location History</CardTitle>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <CardTitle>Location History</CardTitle>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/reports/1">Export to Excel</Link>
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Facility</TableHead>
-                    <TableHead>Arrival Date</TableHead>
-                    <TableHead>Departure Date</TableHead>
-                    <TableHead>Duration (days)</TableHead>
-                    <TableHead>Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {locationHistory.map((history) => {
-                    const duration = history.departureDate
-                      ? differenceInDays(history.departureDate, history.arrivalDate)
-                      : differenceInDays(new Date(), history.arrivalDate);
+              {locationHistory.length === 0 ? (
+                <p className="text-center text-gray-500 py-6">No location stays for this pump.</p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Assigned Location</TableHead>
+                      <TableHead>Actual Location</TableHead>
+                      <TableHead>Arrival date</TableHead>
+                      <TableHead>Departure date</TableHead>
+                      <TableHead>Duration (days)</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {locationHistory.map((history) => {
+                      const duration = history.departureDate
+                        ? differenceInDays(history.departureDate, history.arrivalDate)
+                        : differenceInDays(new Date(), history.arrivalDate);
 
-                    return (
-                      <TableRow key={history.id}>
-                        <TableCell className="font-medium">{history.facility}</TableCell>
-                        <TableCell>{format(history.arrivalDate, 'MMM d, yyyy')}</TableCell>
-                        <TableCell>
-                          {history.departureDate
-                            ? format(history.departureDate, 'MMM d, yyyy')
-                            : <Badge variant="secondary">Current</Badge>}
-                        </TableCell>
-                        <TableCell>{duration}</TableCell>
-                        <TableCell>
-                          <StatusBadge status={history.status} />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
+                      return (
+                        <TableRow key={history.id}>
+                          <TableCell className="font-medium">{history.assignedLocation}</TableCell>
+                          <TableCell>{history.actualLocation}</TableCell>
+                          <TableCell>{format(history.arrivalDate, 'MMM d, yyyy')}</TableCell>
+                          <TableCell>
+                            {history.departureDate
+                              ? format(history.departureDate, 'MMM d, yyyy')
+                              : <Badge variant="secondary">Current</Badge>}
+                          </TableCell>
+                          <TableCell>{duration}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
