@@ -33,13 +33,13 @@ export function AssignAsset() {
     new Date().toISOString().split('T')[0]
   );
   const [returnDate, setReturnDate] = useState("");
-  const [patientId, setPatientId] = useState("");
+  const [orderNumber, setOrderNumber] = useState("");
   const [notes, setNotes] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!selectedAsset || !destinationFacility) {
+    if (!selectedAsset || !destinationFacility || !returnDate || !orderNumber.trim()) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -142,9 +142,11 @@ export function AssignAsset() {
               </div>
             </div>
 
-            {/* Expected Return Date */}
+            {/* Return Date */}
             <div className="space-y-2">
-              <Label htmlFor="returnDate">Expected Return Date (Optional)</Label>
+              <Label htmlFor="returnDate">
+                Return Date <span className="text-red-500">*</span>
+              </Label>
               <div className="relative">
                 <Input
                   id="returnDate"
@@ -156,20 +158,18 @@ export function AssignAsset() {
               </div>
             </div>
 
-            {/* Order Number - commented out, not displayed
+            {/* Order Number */}
             <div className="space-y-2">
-              <Label htmlFor="patientId">Order Number (Optional)</Label>
+              <Label htmlFor="orderNumber">
+                Order Number <span className="text-red-500">*</span>
+              </Label>
               <Input
-                id="patientId"
+                id="orderNumber"
                 placeholder="Enter order number"
-                value={patientId}
-                onChange={(e) => setPatientId(e.target.value)}
+                value={orderNumber}
+                onChange={(e) => setOrderNumber(e.target.value)}
               />
-              <p className="text-xs text-gray-500">
-                Patient identifiers are encrypted and stored securely
-              </p>
             </div>
-            */}
 
             {/* Notes */}
             <div className="space-y-2">
