@@ -27,6 +27,7 @@ import {
   getLocationHistoryByAssetId,
   getNotesByAssetId,
   getPMRecordsByAssetId,
+  getOrderHistoryByAssetId,
 } from "../../lib/data";
 import { Edit, Radio, Clock, Calendar } from "lucide-react";
 import { format, formatDistanceToNow, differenceInDays } from "date-fns";
@@ -37,6 +38,7 @@ export function PumpDetail() {
   const locationHistory = getLocationHistoryByAssetId(id!);
   const notes = getNotesByAssetId(id!);
   const pmRecords = getPMRecordsByAssetId(id!);
+  const orderHistory = getOrderHistoryByAssetId(id!);
 
   const [newNote, setNewNote] = useState("");
 
@@ -82,6 +84,9 @@ export function PumpDetail() {
               <div className="flex items-center gap-3 mb-2">
                 <h1 className="text-3xl font-bold">{asset.serialNumber}</h1>
                 <Badge variant="outline">{asset.assetType}</Badge>
+                {asset.orderNumber && (
+                  <span className="text-lg font-medium text-gray-700">Order: {asset.orderNumber}</span>
+                )}
                 {isGPS && <Radio className="size-5 text-blue-600" />}
               </div>
               <div className="flex items-center gap-4 text-sm text-gray-600">
@@ -135,6 +140,12 @@ export function PumpDetail() {
               </p>
             </div>
             <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Order Number</h3>
+              <p className="font-medium">
+                {asset.orderNumber ?? <span className="text-gray-400">—</span>}
+              </p>
+            </div>
+            <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Location</h3>
               <p className="font-medium">{asset.currentLocation}</p>
             </div>
@@ -162,6 +173,7 @@ export function PumpDetail() {
       <Tabs defaultValue="history" className="space-y-4">
         <TabsList>
           <TabsTrigger value="history">Location History</TabsTrigger>
+          <TabsTrigger value="order-history">Order History</TabsTrigger>
           {isGPS && <TabsTrigger value="tracker">Tracker Details</TabsTrigger>}
           <TabsTrigger value="pm">PM Schedule</TabsTrigger>
           <TabsTrigger value="notes">Notes</TabsTrigger>
@@ -206,6 +218,40 @@ export function PumpDetail() {
                       </TableRow>
                     );
                   })}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Order History Tab */}
+        <TabsContent value="order-history">
+          <Card>
+            <CardHeader>
+              <CardTitle>Order History</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Order Number</TableHead>
+                    <TableHead>Date Created</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {orderHistory.map((entry) => (
+                    <TableRow key={entry.id}>
+                      <TableCell className="font-medium">{entry.orderNumber}</TableCell>
+                      <TableCell>{format(entry.createdAt, 'MMM d, yyyy')}</TableCell>
+                    </TableRow>
+                  ))}
+                  {orderHistory.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={2} className="text-center text-gray-500">
+                        No order history for this asset
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </CardContent>

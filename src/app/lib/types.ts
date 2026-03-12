@@ -19,6 +19,8 @@ export interface Asset {
   currentLocation: string;
   assignedPharmacyId?: string; // Home pharmacy that owns/manages this pump
   assignedFacility?: string; // Assigned facility (e.g. primary facility for this asset)
+  /** Current order number assignment */
+  orderNumber?: string | null;
   lastUpdated: Date;
   /** Expected/actual return date; N/A for At Pharmacy, At PM; past for Overdue/Lost; future for At Facility */
   returnDate?: Date | null;
@@ -29,6 +31,14 @@ export interface Asset {
   simId?: string;
   lastPing?: Date;
   signalStrength?: 'Excellent' | 'Good' | 'Fair' | 'Poor';
+}
+
+/** Historical record of order number assignments for an asset */
+export interface OrderHistoryEntry {
+  id: string;
+  assetId: string;
+  orderNumber: string;
+  createdAt: Date;
 }
 
 export interface LocationHistory {

@@ -11,6 +11,7 @@ import type {
   Report,
   SimCard,
   GpsTrackerDevice,
+  OrderHistoryEntry,
 } from './types';
 
 // Helper function to create dates relative to now
@@ -27,6 +28,7 @@ export const mockAssets: Asset[] = [
     currentLocation: 'St. Mary\'s Hospital',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
+    orderNumber: 'ORD-2025-0842',
     lastUpdated: hoursAgo(2),
     returnDate: daysFromNow(14),
     batteryPercent: 87,
@@ -45,6 +47,7 @@ export const mockAssets: Asset[] = [
     currentLocation: 'Unknown - Last at Regional Medical Center',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'Regional Medical Center',
+    orderNumber: null,
     lastUpdated: daysAgo(7),
     returnDate: daysAgo(5),
     batteryPercent: 15,
@@ -63,6 +66,7 @@ export const mockAssets: Asset[] = [
     currentLocation: 'Main Pharmacy',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
+    orderNumber: null,
     lastUpdated: daysAgo(1),
     returnDate: null,
     pmDueDate: daysAgo(10),
@@ -76,6 +80,7 @@ export const mockAssets: Asset[] = [
     currentLocation: 'Valley View Clinic',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
     assignedFacility: 'Valley View Clinic',
+    orderNumber: 'ORD-2025-0911',
     lastUpdated: hoursAgo(1),
     returnDate: daysFromNow(21),
     batteryPercent: 92,
@@ -359,6 +364,14 @@ export const mockPMRecords: PMRecord[] = [
   },
 ];
 
+export const mockOrderHistory: OrderHistoryEntry[] = [
+  { id: 'oh-1', assetId: '1', orderNumber: 'ORD-2025-0842', createdAt: daysAgo(2) },
+  { id: 'oh-2', assetId: '1', orderNumber: 'ORD-2025-0712', createdAt: daysAgo(45) },
+  { id: 'oh-3', assetId: '1', orderNumber: 'ORD-2025-0588', createdAt: daysAgo(90) },
+  { id: 'oh-4', assetId: '4', orderNumber: 'ORD-2025-0911', createdAt: daysAgo(5) },
+  { id: 'oh-5', assetId: '4', orderNumber: 'ORD-2025-0833', createdAt: daysAgo(30) },
+];
+
 export const mockTrackerConfigs: TrackerConfig[] = [
   {
     id: '1',
@@ -580,3 +593,7 @@ export const getNotesByAssetId = (assetId: string) =>
   mockNotes.filter(n => n.assetId === assetId);
 export const getPMRecordsByAssetId = (assetId: string) => 
   mockPMRecords.filter(pm => pm.assetId === assetId);
+export const getOrderHistoryByAssetId = (assetId: string): OrderHistoryEntry[] =>
+  [...mockOrderHistory.filter(oh => oh.assetId === assetId)].sort(
+    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+  );
