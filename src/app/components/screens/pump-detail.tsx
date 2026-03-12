@@ -108,10 +108,25 @@ export function PumpDetail() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-6 pt-6 border-t">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 pt-6 border-t">
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Status</h3>
               <StatusBadge status={asset.status} className="text-base px-4 py-2" />
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Home Pharmacy</h3>
+              <p className="font-medium">
+                {asset.assignedPharmacyId === '1' && 'Main Pharmacy'}
+                {asset.assignedPharmacyId === 'pharmacy-2' && 'East Side Pharmacy'}
+                {asset.assignedPharmacyId === 'pharmacy-3' && 'West Valley Pharmacy'}
+                {(!asset.assignedPharmacyId || !['1', 'pharmacy-2', 'pharmacy-3'].includes(asset.assignedPharmacyId)) && (
+                  <span className="text-gray-400">Unassigned</span>
+                )}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Assigned Facility</h3>
+              <p className="font-medium">{asset.assignedFacility ?? <span className="text-gray-400">—</span>}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Location</h3>

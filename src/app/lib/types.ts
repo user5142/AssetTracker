@@ -17,7 +17,8 @@ export interface Asset {
   assetType: AssetType;
   status: AssetStatus;
   currentLocation: string;
-  assignedPharmacyId?: string; // NEW: Which pharmacy owns/manages this pump
+  assignedPharmacyId?: string; // Home pharmacy that owns/manages this pump
+  assignedFacility?: string; // Assigned facility (e.g. primary facility for this asset)
   lastUpdated: Date;
   batteryPercent?: number;
   pmDueDate: Date;

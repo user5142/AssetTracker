@@ -26,6 +26,7 @@ export const mockAssets: Asset[] = [
     status: 'At Facility',
     currentLocation: 'St. Mary\'s Hospital - ICU',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
+    assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: hoursAgo(2),
     batteryPercent: 87,
     pmDueDate: daysFromNow(45),
@@ -42,6 +43,7 @@ export const mockAssets: Asset[] = [
     status: 'Lost/Problem',
     currentLocation: 'Unknown - Last at Regional Medical Center',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
+    assignedFacility: 'Regional Medical Center',
     lastUpdated: daysAgo(7),
     batteryPercent: 15,
     pmDueDate: daysFromNow(90),
@@ -58,6 +60,7 @@ export const mockAssets: Asset[] = [
     status: 'At Pharmacy',
     currentLocation: 'Main Pharmacy - Storage',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
+    assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: daysAgo(1),
     pmDueDate: daysAgo(10),
     pmStatus: 'Overdue',
@@ -69,6 +72,7 @@ export const mockAssets: Asset[] = [
     status: 'At Facility',
     currentLocation: 'Valley View Clinic',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
+    assignedFacility: 'Valley View Clinic',
     lastUpdated: hoursAgo(1),
     batteryPercent: 92,
     pmDueDate: daysFromNow(20),
@@ -85,6 +89,7 @@ export const mockAssets: Asset[] = [
     status: 'At PM',
     currentLocation: 'Equipment Services - PM Department',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
+    assignedFacility: 'Regional Medical Center',
     lastUpdated: daysAgo(3),
     batteryPercent: 100,
     pmDueDate: daysAgo(5),
@@ -101,6 +106,7 @@ export const mockAssets: Asset[] = [
     status: 'At Facility',
     currentLocation: 'Memorial Hospital - Patient Room 204',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
+    assignedFacility: 'Memorial Hospital',
     lastUpdated: hoursAgo(6),
     pmDueDate: daysFromNow(60),
     pmStatus: 'Current',
@@ -112,6 +118,7 @@ export const mockAssets: Asset[] = [
     status: 'At Facility',
     currentLocation: 'Sunrise Care Center',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
+    assignedFacility: 'Memorial Hospital',
     lastUpdated: daysAgo(45),
     pmDueDate: daysFromNow(15),
     pmStatus: 'Due Soon',
@@ -123,6 +130,7 @@ export const mockAssets: Asset[] = [
     status: 'At Facility',
     currentLocation: 'City General Hospital - ER',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
+    assignedFacility: 'City General Hospital',
     lastUpdated: hoursAgo(4),
     batteryPercent: 78,
     pmDueDate: daysFromNow(120),
@@ -139,6 +147,13 @@ for (let i = 9; i <= 187; i++) {
   const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'];
   const assetTypes: Asset['assetType'][] = ['Pump - GPS', 'Pump - Rental', 'E-kit'];
   const pharmacyIds = ['1', 'pharmacy-2', 'pharmacy-3'];
+  const facilities = [
+    'St. Mary\'s Hospital',
+    'Regional Medical Center',
+    'Valley View Clinic',
+    'Memorial Hospital',
+    'City General Hospital',
+  ];
   const locations = [
     'St. Mary\'s Hospital',
     'Regional Medical Center',
@@ -159,6 +174,7 @@ for (let i = 9; i <= 187; i++) {
     status,
     currentLocation: locations[i % locations.length],
     assignedPharmacyId: pharmacyIds[i % pharmacyIds.length], // Distribute across pharmacies
+    assignedFacility: facilities[i % facilities.length],
     lastUpdated: hoursAgo(Math.random() * 48),
     batteryPercent: isGPS ? Math.floor(Math.random() * 100) : undefined,
     pmDueDate: daysFromNow(Math.floor(Math.random() * 180) - 30),

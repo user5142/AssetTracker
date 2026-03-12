@@ -250,7 +250,8 @@ export function TrackPumps() {
                   <TableHead>Serial #</TableHead>
                   <TableHead>IMEI #</TableHead>
                   <TableHead>Asset Type</TableHead>
-                  <TableHead>Assigned Pharmacy</TableHead>
+                  <TableHead>Home Pharmacy</TableHead>
+                  <TableHead>Assigned Facility</TableHead>
                   <TableHead>Current Location</TableHead>
                   <TableHead>Last Updated</TableHead>
                   <TableHead>Tracker Battery</TableHead>
@@ -307,6 +308,11 @@ export function TrackPumps() {
                           {asset.assignedPharmacyId === 'pharmacy-2' && 'East Side Pharmacy'}
                           {asset.assignedPharmacyId === 'pharmacy-3' && 'West Valley Pharmacy'}
                           {!asset.assignedPharmacyId && <span className="text-gray-400">Unassigned</span>}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <span className="text-sm">
+                          {asset.assignedFacility ?? <span className="text-gray-400">—</span>}
                         </span>
                       </TableCell>
                       <TableCell>{asset.currentLocation}</TableCell>

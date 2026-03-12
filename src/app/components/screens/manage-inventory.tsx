@@ -436,7 +436,7 @@ export function ManageInventory() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label>Assigned Pharmacy</Label>
+                      <Label>Home Pharmacy</Label>
                       <Select
                         value={newAsset.assignedPharmacyId}
                         onValueChange={(v) => setNewAsset((a) => ({ ...a, assignedPharmacyId: v }))}
@@ -474,7 +474,7 @@ export function ManageInventory() {
                       <TableHead>Type</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead>Location</TableHead>
-                      <TableHead>Assigned Pharmacy</TableHead>
+                      <TableHead>Home Pharmacy</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
