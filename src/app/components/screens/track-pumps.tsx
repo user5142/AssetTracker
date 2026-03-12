@@ -312,7 +312,11 @@ export function TrackPumps() {
                       </TableCell>
                       <TableCell>
                         <span className="text-sm">
-                          {asset.assignedFacility ?? <span className="text-gray-400">—</span>}
+                          {asset.status === 'At Pharmacy' ? (
+                            <span className="text-gray-400">N/A</span>
+                          ) : (
+                            asset.assignedFacility ?? <span className="text-gray-400">—</span>
+                          )}
                         </span>
                       </TableCell>
                       <TableCell>{asset.currentLocation}</TableCell>

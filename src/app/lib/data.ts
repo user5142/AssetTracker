@@ -58,7 +58,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12347',
     assetType: 'Pump - Rental',
     status: 'At Pharmacy',
-    currentLocation: 'Main Pharmacy - Storage',
+    currentLocation: 'Main Pharmacy',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: daysAgo(1),
@@ -143,6 +143,11 @@ export const mockAssets: Asset[] = [
 ];
 
 // Generate more assets for pagination demo
+const pharmacyNames: Record<string, string> = {
+  '1': 'Main Pharmacy',
+  'pharmacy-2': 'East Side Pharmacy',
+  'pharmacy-3': 'West Valley Pharmacy',
+};
 for (let i = 9; i <= 187; i++) {
   const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'];
   const assetTypes: Asset['assetType'][] = ['Pump - GPS', 'Pump - Rental', 'E-kit'];
@@ -160,15 +165,21 @@ for (let i = 9; i <= 187; i++) {
     'Valley View Clinic',
     'Memorial Hospital',
     'City General Hospital',
-    'Main Pharmacy - Storage',
+    'Main Pharmacy',
   ];
   
   const status = statuses[i % statuses.length];
   const assetType = assetTypes[i % assetTypes.length];
   const isGPS = assetType === 'Pump - GPS';
   const assignedFacility = facilities[i % facilities.length];
-  // For At Facility status, current location must match assigned facility exactly
-  const currentLocation = status === 'At Facility' ? assignedFacility : locations[i % locations.length];
+  const assignedPharmacyId = pharmacyIds[i % pharmacyIds.length];
+  // At Facility: current location = assigned facility; At Pharmacy: current location = home pharmacy
+  const currentLocation =
+    status === 'At Facility'
+      ? assignedFacility
+      : status === 'At Pharmacy' && pharmacyNames[assignedPharmacyId]
+        ? pharmacyNames[assignedPharmacyId]
+        : locations[i % locations.length];
 
   mockAssets.push({
     id: String(i),
@@ -176,7 +187,7 @@ for (let i = 9; i <= 187; i++) {
     assetType,
     status,
     currentLocation,
-    assignedPharmacyId: pharmacyIds[i % pharmacyIds.length], // Distribute across pharmacies
+    assignedPharmacyId, // Distribute across pharmacies
     assignedFacility,
     lastUpdated: hoursAgo(Math.random() * 48),
     batteryPercent: isGPS ? Math.floor(Math.random() * 100) : undefined,

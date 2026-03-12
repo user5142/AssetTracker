@@ -126,7 +126,13 @@ export function PumpDetail() {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Assigned Facility</h3>
-              <p className="font-medium">{asset.assignedFacility ?? <span className="text-gray-400">—</span>}</p>
+              <p className="font-medium">
+                {asset.status === 'At Pharmacy' ? (
+                  <span className="text-gray-400">N/A</span>
+                ) : (
+                  asset.assignedFacility ?? <span className="text-gray-400">—</span>
+                )}
+              </p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Location</h3>
