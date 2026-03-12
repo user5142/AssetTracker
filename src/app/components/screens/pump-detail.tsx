@@ -138,6 +138,22 @@ export function PumpDetail() {
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Location</h3>
               <p className="font-medium">{asset.currentLocation}</p>
             </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Return Date</h3>
+              <p className="font-medium">
+                {asset.returnDate != null
+                  ? format(asset.returnDate, 'MMM d, yyyy')
+                  : <span className="text-gray-400">N/A</span>}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Tracker Battery</h3>
+              {asset.batteryPercent !== undefined ? (
+                <BatteryIndicator percent={asset.batteryPercent} />
+              ) : (
+                <span className="text-gray-400 text-sm">N/A</span>
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>

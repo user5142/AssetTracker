@@ -28,6 +28,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: hoursAgo(2),
+    returnDate: daysFromNow(14),
     batteryPercent: 87,
     pmDueDate: daysFromNow(45),
     pmStatus: 'Current',
@@ -45,6 +46,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'Regional Medical Center',
     lastUpdated: daysAgo(7),
+    returnDate: daysAgo(5),
     batteryPercent: 15,
     pmDueDate: daysFromNow(90),
     pmStatus: 'Current',
@@ -62,6 +64,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: daysAgo(1),
+    returnDate: null,
     pmDueDate: daysAgo(10),
     pmStatus: 'Overdue',
   },
@@ -74,6 +77,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
     assignedFacility: 'Valley View Clinic',
     lastUpdated: hoursAgo(1),
+    returnDate: daysFromNow(21),
     batteryPercent: 92,
     pmDueDate: daysFromNow(20),
     pmStatus: 'Due Soon',
@@ -91,6 +95,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
     assignedFacility: 'N/A',
     lastUpdated: daysAgo(3),
+    returnDate: null,
     batteryPercent: 100,
     pmDueDate: daysAgo(5),
     pmStatus: 'Overdue',
@@ -108,6 +113,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: hoursAgo(6),
+    returnDate: daysFromNow(7),
     pmDueDate: daysFromNow(60),
     pmStatus: 'Current',
   },
@@ -120,6 +126,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: daysAgo(45),
+    returnDate: daysFromNow(10),
     pmDueDate: daysFromNow(15),
     pmStatus: 'Due Soon',
   },
@@ -132,6 +139,7 @@ export const mockAssets: Asset[] = [
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'City General Hospital',
     lastUpdated: hoursAgo(4),
+    returnDate: daysFromNow(30),
     batteryPercent: 78,
     pmDueDate: daysFromNow(120),
     pmStatus: 'Current',
@@ -186,6 +194,12 @@ for (let i = 9; i <= 187; i++) {
         ? pharmacyNames[assignedPharmacyId]
         : locations[i % locations.length];
 
+  const returnDate =
+    status === 'At Facility' ? daysFromNow(7 + (i % 30)) :
+    status === 'Overdue' ? daysAgo(1 + (i % 14)) :
+    status === 'Lost/Problem' ? (i % 3 === 0 ? undefined : daysAgo(i % 10)) :
+    null; // At Pharmacy, At PM
+
   mockAssets.push({
     id: String(i),
     serialNumber: `${assetType.includes('E-kit') ? 'EKT' : 'PMP'}-${12344 + i}`,
@@ -195,6 +209,7 @@ for (let i = 9; i <= 187; i++) {
     assignedPharmacyId, // Distribute across pharmacies
     assignedFacility,
     lastUpdated: hoursAgo(Math.random() * 48),
+    returnDate: returnDate ?? null,
     batteryPercent: isGPS ? Math.floor(Math.random() * 100) : undefined,
     pmDueDate: daysFromNow(Math.floor(Math.random() * 180) - 30),
     pmStatus: i % 10 === 0 ? 'Overdue' : i % 5 === 0 ? 'Due Soon' : 'Current',
@@ -212,6 +227,7 @@ const lostProblemIndices = mockAssets
 for (let k = 0; k < 40 && k < lostProblemIndices.length; k++) {
   const idx = lostProblemIndices[k];
   mockAssets[idx].status = 'Overdue';
+  mockAssets[idx].returnDate = mockAssets[idx].returnDate ?? daysAgo(1 + (k % 14));
   // For Overdue status, current location must match assigned facility exactly
   if (mockAssets[idx].assignedFacility) {
     mockAssets[idx].currentLocation = mockAssets[idx].assignedFacility;

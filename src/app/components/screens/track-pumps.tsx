@@ -38,7 +38,7 @@ import type { Asset, AssetStatus, AssetType, PMStatus } from "../../lib/types";
 import { usePharmacy } from "../../lib/pharmacy-context";
 import { Download, Filter, MoreVertical, Search, ChevronLeft, ChevronRight, Radio } from "lucide-react";
 import { Badge } from "../ui/badge";
-import { formatDistanceToNow, format } from "date-fns";
+import { format } from "date-fns";
 
 export function TrackPumps() {
   const [searchParams] = useSearchParams();
@@ -253,9 +253,9 @@ export function TrackPumps() {
                   <TableHead>Home Pharmacy</TableHead>
                   <TableHead>Assigned Facility</TableHead>
                   <TableHead>Current Location</TableHead>
-                  <TableHead>Last Updated</TableHead>
-                  <TableHead>Tracker Battery</TableHead>
+                  <TableHead>Return Date</TableHead>
                   <TableHead>PM Due</TableHead>
+                  <TableHead>Tracker Battery</TableHead>
                   <TableHead className="w-[50px]"></TableHead>
                 </TableRow>
               </TableHeader>
@@ -321,14 +321,9 @@ export function TrackPumps() {
                       </TableCell>
                       <TableCell>{asset.currentLocation}</TableCell>
                       <TableCell className="text-sm text-gray-600">
-                        {formatDistanceToNow(asset.lastUpdated, { addSuffix: true })}
-                      </TableCell>
-                      <TableCell className="text-left">
-                        {asset.batteryPercent !== undefined ? (
-                          <BatteryIndicator percent={asset.batteryPercent} />
-                        ) : (
-                          <span className="text-gray-400 text-sm">N/A</span>
-                        )}
+                        {asset.returnDate != null
+                          ? format(asset.returnDate, 'MMM d, yyyy')
+                          : <span className="text-gray-400">N/A</span>}
                       </TableCell>
                       <TableCell>
                         <div className="space-y-1">
@@ -337,6 +332,13 @@ export function TrackPumps() {
                           </div>
                           <PMStatusBadge status={asset.pmStatus} />
                         </div>
+                      </TableCell>
+                      <TableCell className="text-left">
+                        {asset.batteryPercent !== undefined ? (
+                          <BatteryIndicator percent={asset.batteryPercent} />
+                        ) : (
+                          <span className="text-gray-400 text-sm">N/A</span>
+                        )}
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>

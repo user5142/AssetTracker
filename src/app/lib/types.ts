@@ -20,6 +20,8 @@ export interface Asset {
   assignedPharmacyId?: string; // Home pharmacy that owns/manages this pump
   assignedFacility?: string; // Assigned facility (e.g. primary facility for this asset)
   lastUpdated: Date;
+  /** Expected/actual return date; N/A for At Pharmacy, At PM; past for Overdue/Lost; future for At Facility */
+  returnDate?: Date | null;
   batteryPercent?: number;
   pmDueDate: Date;
   pmStatus: PMStatus;
