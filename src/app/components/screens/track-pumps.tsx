@@ -177,6 +177,7 @@ export function TrackPumps() {
                 <SelectContent>
                   <SelectItem value="all">All Statuses</SelectItem>
                   <SelectItem value="At Facility">At Facility</SelectItem>
+                  <SelectItem value="Overdue">Overdue</SelectItem>
                   <SelectItem value="At Pharmacy">At Pharmacy</SelectItem>
                   <SelectItem value="At PM">At PM</SelectItem>
                   <SelectItem value="Lost/Problem">Lost/Problem</SelectItem>
@@ -260,6 +261,7 @@ export function TrackPumps() {
               <TableBody>
                 {paginatedAssets.map((asset) => {
                   const isProblem = asset.status === 'Lost/Problem';
+                  const isOverdue = asset.status === 'Overdue';
                   const isDueSoon = asset.pmStatus === 'Due Soon';
                   
                   return (
@@ -268,6 +270,8 @@ export function TrackPumps() {
                       className={
                         isProblem
                           ? "border-l-4 border-l-red-500 bg-red-50"
+                          : isOverdue
+                          ? "border-l-4 border-l-amber-500 bg-amber-50"
                           : isDueSoon
                           ? "border-l-4 border-l-yellow-500 bg-yellow-50"
                           : ""

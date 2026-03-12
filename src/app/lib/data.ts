@@ -170,6 +170,14 @@ for (let i = 9; i <= 187; i++) {
   });
 }
 
+// Assign 40 of the 46 Lost/Problem devices to the new Overdue status
+const lostProblemIndices = mockAssets
+  .map((a, idx) => (a.status === 'Lost/Problem' ? idx : -1))
+  .filter((idx) => idx >= 0);
+for (let k = 0; k < 40 && k < lostProblemIndices.length; k++) {
+  mockAssets[lostProblemIndices[k]].status = 'Overdue';
+}
+
 export const mockAlerts: Alert[] = [
   {
     id: '1',

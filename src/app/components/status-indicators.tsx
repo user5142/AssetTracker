@@ -4,6 +4,7 @@ import {
   Home, 
   Wrench, 
   AlertTriangle,
+  Clock,
   type LucideIcon 
 } from "lucide-react";
 import type { AssetStatus, PMStatus } from "../lib/types";
@@ -22,6 +23,11 @@ const statusConfig: Record<AssetStatus, {
     color: 'text-green-700',
     bgColor: 'bg-green-100',
     Icon: CheckCircle,
+  },
+  'Overdue': {
+    color: 'text-amber-700',
+    bgColor: 'bg-amber-100',
+    Icon: Clock,
   },
   'At Pharmacy': {
     color: 'text-blue-700',

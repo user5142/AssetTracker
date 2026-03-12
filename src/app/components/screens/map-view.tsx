@@ -28,6 +28,7 @@ import { MapPin, Navigation, Maximize2 } from "lucide-react";
 export function MapView() {
   const [selectedStatuses, setSelectedStatuses] = useState<AssetStatus[]>([
     'At Facility',
+    'Overdue',
     'At Pharmacy',
     'At PM',
     'Lost/Problem',
@@ -52,6 +53,7 @@ export function MapView() {
 
   const statusColors = {
     'At Facility': '#34C759',
+    'Overdue': '#F59E0B',
     'At Pharmacy': '#007AFF',
     'At PM': '#FF9500',
     'Lost/Problem': '#FF3B30',
@@ -87,7 +89,7 @@ export function MapView() {
             <div>
               <h3 className="font-medium mb-3">Status</h3>
               <div className="space-y-2">
-                {(['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'] as AssetStatus[]).map(
+                {(['At Facility', 'Overdue', 'At Pharmacy', 'At PM', 'Lost/Problem'] as AssetStatus[]).map(
                   (status) => (
                     <div key={status} className="flex items-center space-x-2">
                       <Checkbox

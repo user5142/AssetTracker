@@ -7,6 +7,7 @@ import {
   Wrench,
   AlertTriangle,
   Activity,
+  Clock,
 } from "lucide-react";
 import { mockAssets, mockAlerts } from "../../lib/data";
 import { formatDistanceToNow } from "date-fns";
@@ -24,6 +25,7 @@ export function Dashboard() {
   // Calculate status counts
   const statusCounts = {
     'At Facility': filteredAssets.filter(a => a.status === 'At Facility').length,
+    'Overdue': filteredAssets.filter(a => a.status === 'Overdue').length,
     'At Pharmacy': filteredAssets.filter(a => a.status === 'At Pharmacy').length,
     'At PM': filteredAssets.filter(a => a.status === 'At PM').length,
     'Lost/Problem': filteredAssets.filter(a => a.status === 'Lost/Problem').length,
@@ -39,6 +41,14 @@ export function Dashboard() {
       textColor: 'text-green-700',
       Icon: CheckCircle,
       link: '/track?status=At+Facility',
+    },
+    {
+      label: 'Overdue',
+      count: statusCounts['Overdue'],
+      color: 'bg-amber-50 border-amber-200',
+      textColor: 'text-amber-700',
+      Icon: Clock,
+      link: '/track?status=Overdue',
     },
     {
       label: 'At Pharmacy',
@@ -79,12 +89,12 @@ export function Dashboard() {
           <CardTitle>Status Overview</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="flex flex-wrap gap-4">
             {statusCards.map((status) => {
               const Icon = status.Icon;
               return (
-                <Link key={status.label} to={status.link}>
-                  <div className={`p-4 rounded-lg border-2 hover:shadow-md transition-shadow cursor-pointer ${status.color}`}>
+                <Link key={status.label} to={status.link} className="flex-1 min-w-0 flex">
+                  <div className={`w-full p-4 rounded-lg border-2 hover:shadow-md transition-shadow cursor-pointer ${status.color}`}>
                     <div className="flex items-center gap-2 mb-2">
                       <Icon className={`size-5 ${status.textColor}`} />
                       <span className={`text-sm font-medium ${status.textColor}`}>
