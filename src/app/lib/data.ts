@@ -87,9 +87,9 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12349',
     assetType: 'Pump - GPS',
     status: 'At PM',
-    currentLocation: 'Equipment Services - PM Department',
+    currentLocation: 'Right Way Medical - Ohio',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
-    assignedFacility: 'Regional Medical Center',
+    assignedFacility: 'N/A',
     lastUpdated: daysAgo(3),
     batteryPercent: 100,
     pmDueDate: daysAgo(5),
@@ -171,11 +171,16 @@ for (let i = 9; i <= 187; i++) {
   const status = statuses[i % statuses.length];
   const assetType = assetTypes[i % assetTypes.length];
   const isGPS = assetType === 'Pump - GPS';
-  const assignedFacility = facilities[i % facilities.length];
+  const pmLocations = ['Right Way Medical - Ohio', 'Right Way Medical - Dallas', 'Intuvie'];
+  const isAtPM = status === 'At PM';
+  const atPMIndex = isAtPM ? Math.floor((i - 10) / 4) + 1 : 0; // +1 so first loop At PM gets Dallas (round-robin after hardcoded Ohio)
+  const assignedFacility = isAtPM ? 'N/A' : facilities[i % facilities.length];
   const assignedPharmacyId = pharmacyIds[i % pharmacyIds.length];
+  // At PM: assignedFacility N/A, currentLocation split evenly among Right Way Medical - Ohio, - Dallas, Intuvie
   // At Facility: current location = assigned facility; At Pharmacy: current location = home pharmacy
-  const currentLocation =
-    status === 'At Facility'
+  const currentLocation = isAtPM
+    ? pmLocations[atPMIndex % 3]
+    : status === 'At Facility'
       ? assignedFacility
       : status === 'At Pharmacy' && pharmacyNames[assignedPharmacyId]
         ? pharmacyNames[assignedPharmacyId]
