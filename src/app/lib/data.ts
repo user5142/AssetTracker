@@ -66,8 +66,8 @@ export const mockAssets: Asset[] = [
     id: '4',
     serialNumber: 'PMP-12348',
     assetType: 'Pump - GPS',
-    status: 'In Transit',
-    currentLocation: 'En route to Valley View Clinic',
+    status: 'At Facility',
+    currentLocation: 'Valley View Clinic',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
     lastUpdated: hoursAgo(1),
     batteryPercent: 92,
@@ -136,7 +136,7 @@ export const mockAssets: Asset[] = [
 
 // Generate more assets for pagination demo
 for (let i = 9; i <= 187; i++) {
-  const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'In Transit', 'At PM'];
+  const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'];
   const assetTypes: Asset['assetType'][] = ['Pump - GPS', 'Pump - Rental', 'E-kit'];
   const pharmacyIds = ['1', 'pharmacy-2', 'pharmacy-3'];
   const locations = [
@@ -319,7 +319,7 @@ export const mockTrackerConfigs: TrackerConfig[] = [
     imei: '356938035643811',
     simId: '89011703278306543212',
     assetSerialNumber: 'PMP-12348',
-    location: 'In Transit',
+    location: 'Valley View Clinic',
     batteryPercent: 92,
     lastPing: hoursAgo(1),
   },
@@ -338,7 +338,7 @@ export const mockSimCards: SimCard[] = [
 export const mockGpsTrackerDevices: GpsTrackerDevice[] = [
   { id: 'gps-1', imei: '356938035643809', simId: '89011703278306543210', pumpSerialNumber: 'PMP-12345', location: 'St. Mary\'s Hospital - ICU', batteryPercent: 87, lastPing: hoursAgo(2) },
   { id: 'gps-2', imei: '356938035643810', simId: '89011703278306543211', pumpSerialNumber: 'PMP-12346', location: 'Unknown', batteryPercent: 15, lastPing: daysAgo(5) },
-  { id: 'gps-3', imei: '356938035643811', simId: '89011703278306543212', pumpSerialNumber: 'PMP-12348', location: 'In Transit', batteryPercent: 92, lastPing: hoursAgo(1) },
+  { id: 'gps-3', imei: '356938035643811', simId: '89011703278306543212', pumpSerialNumber: 'PMP-12348', location: 'Valley View Clinic', batteryPercent: 92, lastPing: hoursAgo(1) },
   { id: 'gps-4', imei: '356938035643999' },
   { id: 'gps-5', imei: '356938035644000', simId: '89011703278306543299' },
 ];

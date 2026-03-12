@@ -2,7 +2,6 @@ import { cn } from "./ui/utils";
 import { 
   CheckCircle, 
   Home, 
-  Truck, 
   Wrench, 
   AlertTriangle,
   type LucideIcon 
@@ -28,11 +27,6 @@ const statusConfig: Record<AssetStatus, {
     color: 'text-blue-700',
     bgColor: 'bg-blue-100',
     Icon: Home,
-  },
-  'In Transit': {
-    color: 'text-yellow-700',
-    bgColor: 'bg-yellow-100',
-    Icon: Truck,
   },
   'At PM': {
     color: 'text-orange-700',

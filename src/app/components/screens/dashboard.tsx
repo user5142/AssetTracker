@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import {
   CheckCircle,
   Home,
-  Truck,
   Wrench,
   AlertTriangle,
   Activity,
@@ -26,7 +25,6 @@ export function Dashboard() {
   const statusCounts = {
     'At Facility': filteredAssets.filter(a => a.status === 'At Facility').length,
     'At Pharmacy': filteredAssets.filter(a => a.status === 'At Pharmacy').length,
-    'In Transit': filteredAssets.filter(a => a.status === 'In Transit').length,
     'At PM': filteredAssets.filter(a => a.status === 'At PM').length,
     'Lost/Problem': filteredAssets.filter(a => a.status === 'Lost/Problem').length,
   };
@@ -49,14 +47,6 @@ export function Dashboard() {
       textColor: 'text-blue-700',
       Icon: Home,
       link: '/track?status=At+Pharmacy',
-    },
-    {
-      label: 'In Transit',
-      count: statusCounts['In Transit'],
-      color: 'bg-yellow-50 border-yellow-200',
-      textColor: 'text-yellow-700',
-      Icon: Truck,
-      link: '/track?status=In+Transit',
     },
     {
       label: 'At PM',

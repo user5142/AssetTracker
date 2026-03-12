@@ -3,7 +3,6 @@
 export type AssetStatus = 
   | 'At Facility'
   | 'At Pharmacy'
-  | 'In Transit'
   | 'At PM'
   | 'Lost/Problem';
 

@@ -178,7 +178,6 @@ export function TrackPumps() {
                   <SelectItem value="all">All Statuses</SelectItem>
                   <SelectItem value="At Facility">At Facility</SelectItem>
                   <SelectItem value="At Pharmacy">At Pharmacy</SelectItem>
-                  <SelectItem value="In Transit">In Transit</SelectItem>
                   <SelectItem value="At PM">At PM</SelectItem>
                   <SelectItem value="Lost/Problem">Lost/Problem</SelectItem>
                 </SelectContent>

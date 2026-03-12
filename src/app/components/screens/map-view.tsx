@@ -29,7 +29,6 @@ export function MapView() {
   const [selectedStatuses, setSelectedStatuses] = useState<AssetStatus[]>([
     'At Facility',
     'At Pharmacy',
-    'In Transit',
     'At PM',
     'Lost/Problem',
   ]);
@@ -54,7 +53,6 @@ export function MapView() {
   const statusColors = {
     'At Facility': '#34C759',
     'At Pharmacy': '#007AFF',
-    'In Transit': '#FFCC00',
     'At PM': '#FF9500',
     'Lost/Problem': '#FF3B30',
   };
@@ -89,7 +87,7 @@ export function MapView() {
             <div>
               <h3 className="font-medium mb-3">Status</h3>
               <div className="space-y-2">
-                {(['At Facility', 'At Pharmacy', 'In Transit', 'At PM', 'Lost/Problem'] as AssetStatus[]).map(
+                {(['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'] as AssetStatus[]).map(
                   (status) => (
                     <div key={status} className="flex items-center space-x-2">
                       <Checkbox
