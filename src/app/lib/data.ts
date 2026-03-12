@@ -24,7 +24,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12345',
     assetType: 'Pump - GPS',
     status: 'At Facility',
-    currentLocation: 'St. Mary\'s Hospital - ICU',
+    currentLocation: 'St. Mary\'s Hospital',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
     lastUpdated: hoursAgo(2),
@@ -104,7 +104,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'EKT-00123',
     assetType: 'E-kit',
     status: 'At Facility',
-    currentLocation: 'Memorial Hospital - Patient Room 204',
+    currentLocation: 'Memorial Hospital',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: hoursAgo(6),
@@ -116,7 +116,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12350',
     assetType: 'Pump - Rental',
     status: 'At Facility',
-    currentLocation: 'Sunrise Care Center',
+    currentLocation: 'Memorial Hospital',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: daysAgo(45),
@@ -128,7 +128,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12351',
     assetType: 'Pump - GPS',
     status: 'At Facility',
-    currentLocation: 'City General Hospital - ER',
+    currentLocation: 'City General Hospital',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'City General Hospital',
     lastUpdated: hoursAgo(4),
@@ -166,15 +166,18 @@ for (let i = 9; i <= 187; i++) {
   const status = statuses[i % statuses.length];
   const assetType = assetTypes[i % assetTypes.length];
   const isGPS = assetType === 'Pump - GPS';
-  
+  const assignedFacility = facilities[i % facilities.length];
+  // For At Facility status, current location must match assigned facility exactly
+  const currentLocation = status === 'At Facility' ? assignedFacility : locations[i % locations.length];
+
   mockAssets.push({
     id: String(i),
     serialNumber: `${assetType.includes('E-kit') ? 'EKT' : 'PMP'}-${12344 + i}`,
     assetType,
     status,
-    currentLocation: locations[i % locations.length],
+    currentLocation,
     assignedPharmacyId: pharmacyIds[i % pharmacyIds.length], // Distribute across pharmacies
-    assignedFacility: facilities[i % facilities.length],
+    assignedFacility,
     lastUpdated: hoursAgo(Math.random() * 48),
     batteryPercent: isGPS ? Math.floor(Math.random() * 100) : undefined,
     pmDueDate: daysFromNow(Math.floor(Math.random() * 180) - 30),
@@ -191,7 +194,12 @@ const lostProblemIndices = mockAssets
   .map((a, idx) => (a.status === 'Lost/Problem' ? idx : -1))
   .filter((idx) => idx >= 0);
 for (let k = 0; k < 40 && k < lostProblemIndices.length; k++) {
-  mockAssets[lostProblemIndices[k]].status = 'Overdue';
+  const idx = lostProblemIndices[k];
+  mockAssets[idx].status = 'Overdue';
+  // For Overdue status, current location must match assigned facility exactly
+  if (mockAssets[idx].assignedFacility) {
+    mockAssets[idx].currentLocation = mockAssets[idx].assignedFacility;
+  }
 }
 
 export const mockAlerts: Alert[] = [
