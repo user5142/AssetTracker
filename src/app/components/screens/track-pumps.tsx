@@ -319,7 +319,13 @@ export function TrackPumps() {
                           )}
                         </span>
                       </TableCell>
-                      <TableCell>{asset.currentLocation}</TableCell>
+                      <TableCell>
+                        {asset.currentLocation === 'N/A' ? (
+                          <span className="text-gray-400 text-xs">N/A</span>
+                        ) : (
+                          asset.currentLocation
+                        )}
+                      </TableCell>
                       <TableCell className="text-sm text-gray-600">
                         {asset.returnDate != null
                           ? format(asset.returnDate, 'MMM d, yyyy')

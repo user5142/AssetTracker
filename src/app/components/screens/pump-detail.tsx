@@ -144,7 +144,13 @@ export function PumpDetail() {
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Current Location</h3>
-              <p className="font-medium">{asset.currentLocation}</p>
+              <p className="font-medium">
+                {asset.currentLocation === 'N/A' ? (
+                  <span className="text-gray-400 text-xs">N/A</span>
+                ) : (
+                  asset.currentLocation
+                )}
+              </p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-600 mb-2">Return Date</h3>

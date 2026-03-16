@@ -63,7 +63,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12347',
     assetType: 'Pump - Rental',
     status: 'At Pharmacy',
-    currentLocation: 'Main Pharmacy',
+    currentLocation: 'N/A',
     assignedPharmacyId: '1', // Assigned to Main Pharmacy
     assignedFacility: 'St. Mary\'s Hospital',
     orderNumber: null,
@@ -114,7 +114,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'EKT-00123',
     assetType: 'E-kit',
     status: 'At Facility',
-    currentLocation: 'Memorial Hospital',
+    currentLocation: 'N/A',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: hoursAgo(6),
@@ -127,7 +127,7 @@ export const mockAssets: Asset[] = [
     serialNumber: 'PMP-12350',
     assetType: 'Pump - Rental',
     status: 'At Facility',
-    currentLocation: 'Memorial Hospital',
+    currentLocation: 'N/A',
     assignedPharmacyId: 'pharmacy-3', // Assigned to West Valley Pharmacy
     assignedFacility: 'Memorial Hospital',
     lastUpdated: daysAgo(45),
@@ -191,13 +191,15 @@ for (let i = 9; i <= 187; i++) {
   const assignedPharmacyId = pharmacyIds[i % pharmacyIds.length];
   // At PM: assignedFacility N/A, currentLocation split evenly among Right Way Medical - Ohio, - Dallas, Intuvie
   // At Facility: current location = assigned facility; At Pharmacy: current location = home pharmacy
-  const currentLocation = isAtPM
-    ? pmLocations[atPMIndex % 3]
-    : status === 'At Facility'
-      ? assignedFacility
-      : status === 'At Pharmacy' && pharmacyNames[assignedPharmacyId]
-        ? pharmacyNames[assignedPharmacyId]
-        : locations[i % locations.length];
+  const currentLocation = isGPS
+    ? isAtPM
+      ? pmLocations[atPMIndex % 3]
+      : status === 'At Facility'
+        ? assignedFacility
+        : status === 'At Pharmacy' && pharmacyNames[assignedPharmacyId]
+          ? pharmacyNames[assignedPharmacyId]
+          : locations[i % locations.length]
+    : 'N/A';
 
   const returnDate =
     status === 'At Facility' ? daysFromNow(7 + (i % 30)) :
@@ -233,9 +235,16 @@ for (let k = 0; k < 40 && k < lostProblemIndices.length; k++) {
   const idx = lostProblemIndices[k];
   mockAssets[idx].status = 'Overdue';
   mockAssets[idx].returnDate = mockAssets[idx].returnDate ?? daysAgo(1 + (k % 14));
-  // For Overdue status, current location must match assigned facility exactly
-  if (mockAssets[idx].assignedFacility) {
+  // For Overdue status on GPS assets, current location must match assigned facility exactly
+  if (mockAssets[idx].assignedFacility && mockAssets[idx].assetType === 'Pump - GPS') {
     mockAssets[idx].currentLocation = mockAssets[idx].assignedFacility;
+  }
+}
+
+// Ensure non-GPS assets always have "N/A" as current location
+for (const asset of mockAssets) {
+  if (asset.assetType !== 'Pump - GPS') {
+    asset.currentLocation = 'N/A';
   }
 }
 
