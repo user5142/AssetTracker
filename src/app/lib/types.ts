@@ -4,7 +4,7 @@ export type AssetStatus =
   | 'At Facility'
   | 'Overdue'
   | 'At Pharmacy'
-  | 'At PM'
+  | 'At Service'
   | 'Lost/Problem';
 
 export type AssetType = 'Pump - GPS' | 'Pump - Rental' | 'E-kit';
@@ -22,7 +22,7 @@ export interface Asset {
   /** Current order number assignment */
   orderNumber?: string | null;
   lastUpdated: Date;
-  /** Expected/actual return date; N/A for At Pharmacy, At PM; past for Overdue/Lost; future for At Facility */
+  /** Expected/actual return date; N/A for At Pharmacy, At Service; past for Overdue/Lost; future for At Facility */
   returnDate?: Date | null;
   batteryPercent?: number;
   pmDueDate: Date;

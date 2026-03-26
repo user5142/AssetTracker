@@ -27,7 +27,7 @@ export function Dashboard() {
     'At Facility': filteredAssets.filter(a => a.status === 'At Facility').length,
     'Overdue': filteredAssets.filter(a => a.status === 'Overdue').length,
     'At Pharmacy': filteredAssets.filter(a => a.status === 'At Pharmacy').length,
-    'At PM': filteredAssets.filter(a => a.status === 'At PM').length,
+    'At Service': filteredAssets.filter(a => a.status === 'At Service').length,
     'Lost/Problem': filteredAssets.filter(a => a.status === 'Lost/Problem').length,
   };
 
@@ -59,12 +59,12 @@ export function Dashboard() {
       link: '/track?status=At+Pharmacy',
     },
     {
-      label: 'At PM',
-      count: statusCounts['At PM'],
+      label: 'At Service',
+      count: statusCounts['At Service'],
       color: 'bg-orange-50 border-orange-200',
       textColor: 'text-orange-700',
       Icon: Wrench,
-      link: '/track?status=At+PM',
+      link: '/track?status=At+Service',
     },
     {
       label: 'Lost/Problem',

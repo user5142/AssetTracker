@@ -95,7 +95,7 @@ export const mockAssets: Asset[] = [
     id: '5',
     serialNumber: 'PMP-12349',
     assetType: 'Pump - GPS',
-    status: 'At PM',
+    status: 'At Service',
     currentLocation: 'Right Way Medical - Ohio',
     assignedPharmacyId: 'pharmacy-2', // Assigned to East Side Pharmacy
     assignedFacility: 'N/A',
@@ -162,7 +162,7 @@ const pharmacyNames: Record<string, string> = {
   'pharmacy-3': 'West Valley Pharmacy',
 };
 for (let i = 9; i <= 187; i++) {
-  const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'At PM', 'Lost/Problem'];
+  const statuses: Asset['status'][] = ['At Facility', 'At Pharmacy', 'At Service', 'Lost/Problem'];
   const assetTypes: Asset['assetType'][] = ['Pump - GPS', 'Pump - Rental', 'E-kit'];
   const pharmacyIds = ['1', 'pharmacy-2', 'pharmacy-3'];
   const facilities = [
@@ -185,11 +185,11 @@ for (let i = 9; i <= 187; i++) {
   const assetType = assetTypes[i % assetTypes.length];
   const isGPS = assetType === 'Pump - GPS';
   const pmLocations = ['Right Way Medical - Ohio', 'Right Way Medical - Dallas', 'Intuvie'];
-  const isAtPM = status === 'At PM';
-  const atPMIndex = isAtPM ? Math.floor((i - 10) / 4) + 1 : 0; // +1 so first loop At PM gets Dallas (round-robin after hardcoded Ohio)
+  const isAtPM = status === 'At Service';
+  const atPMIndex = isAtPM ? Math.floor((i - 10) / 4) + 1 : 0; // +1 so first loop At Service gets Dallas (round-robin after hardcoded Ohio)
   const assignedFacility = isAtPM ? 'N/A' : facilities[i % facilities.length];
   const assignedPharmacyId = pharmacyIds[i % pharmacyIds.length];
-  // At PM: assignedFacility N/A, currentLocation split evenly among Right Way Medical - Ohio, - Dallas, Intuvie
+  // At Service: assignedFacility N/A, currentLocation split evenly among Right Way Medical - Ohio, - Dallas, Intuvie
   // At Facility: current location = assigned facility; At Pharmacy: current location = home pharmacy
   const currentLocation = isGPS
     ? isAtPM
@@ -205,7 +205,7 @@ for (let i = 9; i <= 187; i++) {
     status === 'At Facility' ? daysFromNow(7 + (i % 30)) :
     status === 'Overdue' ? daysAgo(1 + (i % 14)) :
     status === 'Lost/Problem' ? (i % 3 === 0 ? undefined : daysAgo(i % 10)) :
-    null; // At Pharmacy, At PM
+    null; // At Pharmacy, At Service
 
   mockAssets.push({
     id: String(i),

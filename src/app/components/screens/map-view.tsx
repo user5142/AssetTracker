@@ -30,7 +30,7 @@ export function MapView() {
     'At Facility',
     'Overdue',
     'At Pharmacy',
-    'At PM',
+    'At Service',
     'Lost/Problem',
   ]);
   const [locationFilter, setLocationFilter] = useState<string>("all");
@@ -55,7 +55,7 @@ export function MapView() {
     'At Facility': '#34C759',
     'Overdue': '#F59E0B',
     'At Pharmacy': '#007AFF',
-    'At PM': '#FF9500',
+    'At Service': '#FF9500',
     'Lost/Problem': '#FF3B30',
   };
 
@@ -89,7 +89,7 @@ export function MapView() {
             <div>
               <h3 className="font-medium mb-3">Status</h3>
               <div className="space-y-2">
-                {(['At Facility', 'Overdue', 'At Pharmacy', 'At PM', 'Lost/Problem'] as AssetStatus[]).map(
+                {(['At Facility', 'Overdue', 'At Pharmacy', 'At Service', 'Lost/Problem'] as AssetStatus[]).map(
                   (status) => (
                     <div key={status} className="flex items-center space-x-2">
                       <Checkbox

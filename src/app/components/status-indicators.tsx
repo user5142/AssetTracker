@@ -34,7 +34,7 @@ const statusConfig: Record<AssetStatus, {
     bgColor: 'bg-blue-100',
     Icon: Home,
   },
-  'At PM': {
+  'At Service': {
     color: 'text-orange-700',
     bgColor: 'bg-orange-100',
     Icon: Wrench,

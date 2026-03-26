@@ -179,7 +179,7 @@ export function TrackPumps() {
                   <SelectItem value="At Facility">At Facility</SelectItem>
                   <SelectItem value="Overdue">Overdue</SelectItem>
                   <SelectItem value="At Pharmacy">At Pharmacy</SelectItem>
-                  <SelectItem value="At PM">At PM</SelectItem>
+                  <SelectItem value="At Service">At Service</SelectItem>
                   <SelectItem value="Lost/Problem">Lost/Problem</SelectItem>
                 </SelectContent>
               </Select>
